@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF to DOCX Converter</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="form-wrapper">
+        <h1>PDF to DOCX Converter</h1>
+        <form method="post" action="/convert" enctype="multipart/form-data">
+            <div class="input-area">
+                <label for="pdf_file" class="input-icon">📂</label>
+                <span class="input-text" id="input_text">Выберите PDF файл</span>
+                <input type="file" name="pdf_file" id="pdf_file" class="input-file" accept=".pdf">
+                <span class="selected-file" id="selected_file_name">Файл не выбран</span>
+            </div>
+            <input type="submit" value="Convert">
+        </form>
+        <div class="output-area">
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 PDF to WORD Converter.</p>
+    </footer>
+
+    <script>
+        // Обработчик события при выборе файла
+        document.getElementById("pdf_file").addEventListener("change", function(event) {
+            const selectedFile = event.target.files[0];
+            const selectedFileName = selectedFile ? selectedFile.name : "Файл не выбран";
+            document.getElementById("selected_file_name").textContent = selectedFileName;
+            // Проверяем, выбран ли файл, и скрываем надпись "Выберите PDF файл", если файл выбран
+            document.getElementById("input_text").style.display = selectedFile ? "none" : "inline";
+        });
+    </script>
+
+</body>
+</html>
